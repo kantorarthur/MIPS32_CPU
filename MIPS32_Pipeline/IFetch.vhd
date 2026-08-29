@@ -1,10 +1,10 @@
 ----------------------------------------------------------------------------------
--- Company: Technical University of Cluj-Napoca 
--- Engineer: Cristian Vancea
+-- Company: 
+-- Engineer: 
 -- 
 -- Module Name: IFetch - Behavioral
 -- Description: 
---      Instruction Fecth Unit
+--      Instruction Fetch Unit
 ----------------------------------------------------------------------------------
 
 library IEEE;

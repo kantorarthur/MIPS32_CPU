@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: Technical University of Cluj-Napoca 
--- Engineer: Cristian Vancea
+-- Company: 
+-- Engineer: 
 -- 
 -- Module Name: MEM - Behavioral
 -- Description: 
