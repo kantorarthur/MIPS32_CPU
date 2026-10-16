@@ -12,22 +12,21 @@ The datapath is split into independent, composable VHDL entities:
 |---|---|
 | `IFetch` | Program counter, instruction memory interface, and next-PC selection logic (sequential / branch / jump targets) |
 | `ID` | Register file and instruction field decoding |
-| `UC` | Hardwired control unit — decodes the 6-bit opcode into datapath control signals (`RegDst`, `ExtOp`, `ALUSrc`, `Branch`, `Jump`, `ALUOp`, `MemWrite`, `MemToReg`, `RegWrite`) |
+| `UC` | Control unit — decodes the 6-bit opcode into datapath control signals (`RegDst`, `ExtOp`, `ALUSrc`, `Branch`, `Jump`, `ALUOp`, `MemWrite`, `MemToReg`, `RegWrite`) |
 | `EX` | ALU and ALU-control logic, sign/zero extension handling, and branch-target address computation |
 | `MEM` | Data memory read/write interface |
 | `MPG` | Monopulse generator / pushbutton debouncer, used for manual single-step clocking and reset |
 | `SSD` | Seven-segment display driver used for on-board signal visualization |
 
-# MIPS 32 Single Cycle version
+# MIPS32 Single Cycle version
 <img width="1001" height="556" alt="Image" src="https://github.com/user-attachments/assets/4b27b158-375d-412a-8a96-f0b1df47b9bd" />
 
 - Each instruction executes in exactly **one clock cycle**
 - Cycle length is fixed to the slowest instruction (`lw`)
-- No pipeline registers, datapath is fully combinational between stages
 - Simple to design and verify, but wastes time on fast instructions
 - No hazards to handle (no overlapping instructions)
 
-# MIPS 32 Pipelined version
+# MIPS32 Pipelined version
 <img width="998" height="553" alt="Image" src="https://github.com/user-attachments/assets/dfdc4732-0a71-4dd0-8e59-da3cc013178f" />
 
 - Each instruction still takes **5 cycles**, but a new one starts every cycle
@@ -122,7 +121,7 @@ Every instruction is decoded from a 32-bit word laid out in one of three MIPS fo
 
 | Switches | Function |
 |---|---|
-| `sw[2:0]` | Enable memory writing (keep set to `1`) |
+| `sw[2:0]` | Enable memory writing on `01` |
 | `sw[7:5] = 000` | 7-segment display shows **instruction** |
 | `sw[7:5] = 001` | 7-segment display shows **next PC** |
 | `sw[7:5] = 010` | 7-segment display shows **ALU result** |
@@ -138,7 +137,7 @@ Every instruction is decoded from a 32-bit word laid out in one of three MIPS fo
 |---|---|---|---|
 | `btn[0]` | Middle | Step through instructions | `sw[7:5] = 000` (view instructions) |
 | `btn[1]` | Upper | Reset to first instruction | `sw[7:5] = 000` (view instructions) |
-| `btn[2]` | Left | Navigate ROM data / memory | `sw[7:5] = 111` (view memory content) |
+| `btn[2]` | Left | Navigate data memory | `sw[7:5] = 111` (view memory content) |
 | `btn[3]` | Right | Navigate Register File | `sw[7:5] = 110` (view register content) |
 
 ## License
